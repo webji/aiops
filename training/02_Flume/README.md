@@ -4,6 +4,96 @@
 http://flume.apache.org
 ```
 
+- [Brief Introduction](#brief-introduction)
+  - [Architecture](#architecture)
+    - [Basic Flow](#basic-flow)
+    - [Multi-Agent Flow](#multi-agent-flow)
+    - [Consolidation](#consolidation)
+    - [Multiplexing](#multiplexing)
+    - [Bin Structure](#bin-structure)
+    - [Start Agent](#start-agent)
+  - [Setup](#setup)
+- [Demo](#demo)
+  - [A Simple Sample](#a-simple-sample)
+    - [Prepare](#prepare)
+    - [Sample Config](#sample-config)
+    - [Start Sample Agent](#start-sample-agent)
+    - [Test](#test)
+  - [ZooKeeper Integration](#zookeeper-integration)
+  - [Plugins](#plugins)
+  - [Data Ingestion](#data-ingestion)
+    - [RPC](#rpc)
+    - [Executing Commands](#executing-commands)
+    - [Network Streaming](#network-streaming)
+- [Components](#components)
+  - [Sources](#sources)
+    - [Avro Source](#avro-source)
+    - [Thift Source](#thrift-source)
+    - [Exec Source](#exec-source)
+    - [JMS Source](#jms-source)
+    - [Spooling Directory Source](#spooling-directory-source)
+    - [Taildir Source](#taildir-source)
+    - [Kafka Source](#kafka-source)
+    - [NetCat TCP Source](#netcat-tcp-source)
+    - [NetCat UDP Source](#netcat-udp-source)
+    - [Syslog TCP Source](#syslog-tcp-source)
+    - [Multiport Syslog TCP Source](#multiport-syslog-tcp-source)
+    - [Syslog UDP Source](#syslog-udp-source)
+    - [HTTP Source](#http-source)
+    - [Stress Source](#stress-source)
+    - [Custom Source](#custom-source)
+    - [Scribe Source](#scribe-source)
+  - [Sinks](#sinks)
+    - [HDFS Sink](#hdfs-sink)
+    - [Hive Sink](#hive-sink)
+    - [Logger Sink](#logger-sink)
+    - [Avro Sink](#avro-sink)
+    - [Thrift Sink](#thrift-sink)
+    - [IRC Sink](#irc-sink)
+    - [File Roll Sink](#file-roll-sink)
+    - [Null Sink](#null-sink)
+    - [HBase Sinks](#hbase-sinks)
+      - [HBaseSink](#hbasesink)
+      - [HBase2Sink](#hbase2sink)
+      - [AsyncHBaseSink](#asynchbasesink)
+    - [MorphlineSolrSink](#morphlinesolrsink)
+    - [ElasticSearchSink](#elasticsearchsink)
+    - [Kite Dataset Sink](#kite-dataset-sink)
+    - [Kafka Sink](#kafka-sink)
+    - [HTTP Sink](#http-sink)
+    - [Custom Sink](#custom-sink)
+  - [Channels](#channels)
+    - [Memory Channel](#memory-channel)
+    - [JDBC Channel](#jdbc-channel)
+    - [Kafka Channel](#kafka-channel)
+    - [File Channel](#file-channel)
+    - [Spillable Memory Channel](#spillable-memory-channel)
+    - [Pseudo Transaction Channel](#pseudo-transaction-channel)
+    - [Custom Channel](#custom-channel)
+  - [Channel Selectors](#channel-selectors)
+    - [Replicating Channel Selector](#replicating-channel-selector)
+    - [Multiplexing Channel Selector](#multiplexing-channel-selector)
+    - [Custom Channel Selector](#custom-channel-selector)
+  - [Sink Processors](#sink-processors)
+    - [Default Sink Processor](#default-sink-processor)
+    - [Failover Sink Processor](#failover-sink-processor)
+    - [Load balancing Sink Processor](#load-balancing-sink-processor)
+    - [Custom Sink Processor](#custom-sink-processor)
+  - [Event Serializers](#event-serializers)
+    - [Body Text Serializer](#body-text-serializer)
+    - ["Flume Event" Avro Event Serializer](#"flume-event"-avro-event-serializer)
+    - [Avro Event Serializer](#avro-event-serializer)
+  - [Interceptors](#interceptors)
+    - [Timestamp Interceptor](#timestamp-interceptor)
+    - [Host Interceptor](#host-interceptor)
+    - [Static Interceptor](#static-interceptor)
+    - [Remove Header Interceptor](#remove-header-interceptor)
+    - [UUPD Interceptor](#uuid-interceptor)
+    - [Morphline Interceptor](#morphline-interceptor)
+    - [Search and Replace Interceptor](#search-and-replace-interceptor)
+    - [Regex Filtering Interceptor](#regex-filtering-interceptor)
+  - [Alias Conventions](#alias-conventions)
+
 ## Brief Introduction
 
 ### Architecture
@@ -284,6 +374,8 @@ bin/flume-ng avro-client -H localhost -p 41414 -F /usr/logs/log.10
 - Syslog
 - Netcat
 
+## Components
+
 ### Sources
 
 #### Avro Source
@@ -431,7 +523,7 @@ a1.sources.r1.ports = 10001 10002 10003
 a1.sources.r1.portHeader = port
 ```
 
-#### Syslog UDP Source¶
+#### Syslog UDP Source
 
 ```properties
 a1.sources = r1
@@ -456,7 +548,7 @@ a1.sources.r1.HttpConfiguration.sendServerVersion = false
 a1.sources.r1.ServerConnector.idleTimeout = 300
 ```
 
-#### Stress Source¶
+#### Stress Source
 
 ```properties
 a1.sources = stresssource-1
@@ -541,7 +633,7 @@ a1.sinks.k1.type = logger
 a1.sinks.k1.channel = c1
 ```
 
-#### Avro Sink¶
+#### Avro Sink
 
 ```properties
 a1.channels = c1
@@ -552,7 +644,7 @@ a1.sinks.k1.hostname = 10.10.10.10
 a1.sinks.k1.port = 4545
 ```
 
-#### Thrift Sink¶
+#### Thrift Sink
 
 ```properties
 a1.channels = c1
@@ -594,7 +686,7 @@ a1.sinks.k1.type = null
 a1.sinks.k1.channel = c1
 ```
 
-#### HBaseSinks
+#### HBase Sinks
 
 ##### HBaseSink
 
@@ -995,13 +1087,3 @@ a1.sources.r1.interceptors.i1.serializers.s1.pattern = yyyy-MM-dd HH:mm
 |y | ke**y**
 |h | **h**ost
 |s | **s**erializer
-
-#### 
-
-```properties
-```
-
-#### 
-
-```properties
-```
