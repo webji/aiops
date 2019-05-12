@@ -1087,3 +1087,11 @@ a1.sources.r1.interceptors.i1.serializers.s1.pattern = yyyy-MM-dd HH:mm
 |y | ke**y**
 |h | **h**ost
 |s | **s**erializer
+
+### Samples
+
+```bash
+bin/flume-ng agent --conf conf --conf-file conf/netcat_s_mem_c_fileroll_s.properties --name a2 -Dflume.root.logger=DEBUG,console,LOGFILE -Dorg.apache.flume.log.printconfig=true -Dorg.apache.flume.log.rawdata=true -Dflume.monitoring.type=http -Dflume.monitoring.port=32222
+```
+
+- netcat_r_mem_c_fileroll_k.properties
